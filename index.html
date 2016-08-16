@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>JavaScript boilerplate</title>
+
+	<link type="text/css" rel="stylesheet" href="css/bootstrap.css" />
+	<link type="text/css" rel="stylesheet" href="css/mycss.css" />
+
+
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script type="text/javascript" src="js/jquery-ui-1.8.21.custom.min.js"></script>
+
+	<script type="text/javascript" src="js/jquery.validate.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.js"></script>
+	<script type="text/javascript" src="js/bootstrap-spinner.js"></script>
+	<script type="text/javascript" src="js/mycode.js"></script>
+</head>
+
+<body>
+
+	<!--modal-->
+	<div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">Delete?</h4>
+				</div>
+				<div class="modal-body">
+					<h3>This item will be permanently deleted</h3>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary btn-danger" id="btnDel">Delete</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</br>
+
+<div class="container">
+
+	<!-- justified navigation menu-->
+	<div class="masthead">
+		<nav>
+			<ul class="nav nav-justified">
+				<li class="active"><a href="#">Home</a></li>
+				<li><a href="#">Projects</a></li>
+				<li><a href="#">Services</a></li>
+				<li><a href="#">Downloads</a></li>
+				<li><a href="#">About</a></li>
+				<li><a href="#">Contact</a></li>
+			</ul>
+		</nav>
+	</div>
+
+	<!-- Jumbotron -->
+	<div class="jumbotron">
+		<h1>Marketing stuff!</h1>
+		<p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet.</p>
+		<p><a class="btn btn-lg btn-success" href="#" role="button">Get started today</a></p>
+	</div>
+
+	<!-- form -->
+	<form>
+		<div class="form-group">
+			<label class="control-label" for="item">Item:</label>
+			<div class="input-group">
+				<input class="form-control" placeholder="Insert an item" name="obj" type="text" id="obj"/>
+				<span class="input-group-addon"></span>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="control-label" for="notes">Notes:</label>
+			<div class="input-group">
+				<input class="form-control" placeholder="Insert notes" name="descr" type="text" id="descr"/>
+				<span class="input-group-addon"> </span>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="control-label" for="price">Price:</label>
+			<div class="input-group">
+				<input class="form-control" placeholder="Insert a price" name="pr" type="text" id="pr"/>
+				<span class="input-group-addon">€</span>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="control-label" for="quantity">Quantity:</label>
+			<div class="input-group">
+				<span class="input-group-btn">
+					<button type="button" class="btn btn-default" data-value="decrease" data-target="#qty" data-toggle="spinner">
+						<span class="glyphicon glyphicon-minus"></span>
+					</button>
+				</span>
+				<input type="text" data-ride="spinner" id="qty" name="qty" class="form-control input-number" placeholder="Insert a quantity">
+				<span class="input-group-btn">
+					<button type="button" class="btn btn-default" data-value="increase" data-target="#qty" data-toggle="spinner">
+						<span class="glyphicon glyphicon-plus"></span>
+					</button>
+				</span>
+			</div>
+
+		</div>
+		<button type="submit" class="btn btn-primary" id ="addTask">Submit</button>
+	</form>    
+
+
+	<br/><br/>
+
+
+	<!-- attached elements here -->
+	<div class="row" id="a">
+
+		<div id="loading">
+			<img src='img/load.gif' alt='loading...' />
+		</div>
+
+	</div>
+
+	<br/><br/>
+
+	<!--footer -->
+	<footer class="footer">
+		<p>&copy; 2016 Company, Inc.</p>
+	</footer>
+
+</div> <!-- /container -->
+
+
+</body>
+
+</html>
+
+
