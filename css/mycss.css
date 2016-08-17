@@ -1,8 +1,6 @@
- 
-#sortable { list-style-type: none; margin: 0; padding: 0; width: 50%; }
-#sortable li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em;  height: 16px; }
-#droppable { width: 100px; height: 50px; padding: 0.5em; float: left;  margin: 10px 10px 10px 0;}
 #x { width: 20px; height: 20px; float: right; margin-right:5px;}
+.up { margin: 25px 0px 25px 0px;}
 .up:hover {
    background-color: aliceblue;
 }
+

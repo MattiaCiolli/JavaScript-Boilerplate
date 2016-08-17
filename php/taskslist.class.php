@@ -52,18 +52,15 @@ class TasksList
     {
       // Reorder task list
       case 'updateList':
-		$new_order = $content;
-
-		// update list
-        for ($i=0; $i < count($new_order); $i++)
-        {
-          // escape data received from client
-          $new_order[$i] = 
-                      $this->mMysqli->real_escape_string($new_order[$i]);
-          // update task
-          $result = $this->mMysqli->query('UPDATE ObjectsToBuy SET ordernum="' . 
-                             $i . '" WHERE id="' . $new_order[$i] . '"');
-        }
+		
+        $id = trim($this->mMysqli->real_escape_string($content[0]));
+		    $obj = trim($this->mMysqli->real_escape_string($content[1]));
+        $des = trim($this->mMysqli->real_escape_string($content[2]));
+        $pr = trim($this->mMysqli->real_escape_string($content[3]));
+        $qty = trim($this->mMysqli->real_escape_string($content[4]));
+          
+          // update item
+          $result = $this->mMysqli->query('UPDATE ObjectsToBuy SET objectname="' . $obj . '", description="' . $des . '", price="' . $pr . '", quantity="' . $qty .'" WHERE id="' . $id . '"');
         $updatedList = $this->BuildTasksList();
         return $updatedList;
         break;
@@ -104,6 +101,29 @@ class TasksList
                                         $content . '"');
         $updatedList = $this->BuildTasksList();
         return $updatedList;
+        break;
+    
+
+    // get an object by id
+      case 'getObj':
+        // escape input data
+        $content = trim($this->mMysqli->real_escape_string($content));
+        // delete the task
+        $result = $this->mMysqli->query('SELECT * FROM ObjectsToBuy WHERE id="' . 
+                                        $content . '"');
+      $return_arr = array();
+      while ($row = $result->fetch_assoc()) 
+    { 
+    $myList[ 'id' ] = $row['id'];
+    $myList[ 'objectname' ] = $row['objectname'];
+    $myList[ 'description' ] = $row['description'];
+    $myList[ 'price' ] = $row['price'];
+    $myList[ 'quantity' ] = $row['quantity'];
+    array_push($return_arr,$myList);
+    }
+    // return the array as json 
+    return json_encode($return_arr);
+      
         break;
     }
   }

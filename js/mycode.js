@@ -5,6 +5,8 @@
 var draggedTask;
 
 // funzione parametrica che gestisce tutte le chiamate ajax al server
+//per aggiungere qty ai div
+//<div class="input-group"><span class="input-group-btn"><button type="button" class="btn btn-default" data-value="decrease" data-target="#i'+jsonData[ob].id+'" data-toggle="spinner"><span class="glyphicon glyphicon-minus"></span></button></span><input type="text" data-ride="spinner" id="i'+jsonData[ob].id+'" class="form-control input-number" value="'+jsonData[ob].quantity+'"><span class="input-group-btn"><button type="button" class="btn btn-default" data-value="increase" data-target="#i'+jsonData[ob].id+'" data-toggle="spinner"><span class="glyphicon glyphicon-plus"></span></button></span>
 function syncToServer( value, op ) {
 	$.ajax({
 		url: "php/drag-and-drop.php",
@@ -13,13 +15,32 @@ function syncToServer( value, op ) {
 					$('.up').remove();
 					var listItem;
 					for ( var ob in jsonData ) {
-						listItem = '<div data-id="' + jsonData[ob].id + '" id="' + jsonData[ob].id + '" class=\"col-lg-4 up\"><h2>' + jsonData[ob].objectname + '</h2><p class=\"text-danger\">'+jsonData[ob].description+'</p><p></br><h4>Quantity:</h4><div class="input-group"><span class="input-group-btn"><button type="button" class="btn btn-default" data-value="decrease" data-target="#i'+jsonData[ob].id+'" data-toggle="spinner"><span class="glyphicon glyphicon-minus"></span></button></span><input type="text" data-ride="spinner" id="i'+jsonData[ob].id+'" class="form-control input-number" value="'+jsonData[ob].quantity+'"><span class="input-group-btn"><button type="button" class="btn btn-default" data-value="increase" data-target="#i'+jsonData[ob].id+'" data-toggle="spinner"><span class="glyphicon glyphicon-plus"></span></button></span></div><p></br><h4>Total price: <b>'+jsonData[ob].price+'</b></h4></br></p></p><a data-id="' + jsonData[ob].id + '" href=\"#\" class=\"btn btn-lg btn-success confirm-delete\" data-toggle=\"modal\" data-target=\"#basicModal\">Remove all</a></div>';
+						listItem = '<div data-id="' + jsonData[ob].id + '" id="' + jsonData[ob].id + '" class=\"col-lg-4 up\"><h2>' + jsonData[ob].objectname + '</h2><p class=\"text-danger\">'+jsonData[ob].description+'</p><p></br><h4>Quantity: <b>'+jsonData[ob].quantity+'</b></h4><p></br><h4>Total price: <b>'+jsonData[ob].price+'€</b></h4></br></p></p><a data-id="' + jsonData[ob].id + '" href=\"#\" class=\"btn btn-default editbtn\" data-toggle=\"modal\" data-target=\"#editModal\">Edit <span class="glyphicon glyphicon-edit"></span></a><a data-id="' + jsonData[ob].id + '" href=\"#\" class=\"btn btn-primary btn-danger confirm-delete\" data-toggle=\"modal\" data-target=\"#basicModal\">Remove <span class="glyphicon glyphicon-trash"></span></a></div>';
 						$(listItem).appendTo('#a');
 					};
 				},
 		dataType: "json"
 	});
-}			
+}		
+
+function getObj	( value, op ){
+	$.ajax({
+		url: "php/drag-and-drop.php",
+		data: { content: value, action: op },
+		success:  function(jsonData) {
+					
+					var listItem;
+					for ( var ob in jsonData ) {
+						$("#edobj").val(jsonData[ob].objectname);
+						$("#eddescr").val(jsonData[ob].description);
+						$("#edpr").val(jsonData[ob].price);
+						$("#edqty").val(jsonData[ob].quantity);
+					};
+					
+				},
+		dataType: "json"
+	});
+}		
 
 // codice da avviare al caricamento del DOM ...
 $(function() {
@@ -34,7 +55,7 @@ $(function() {
 
 					var listItem;
 					for ( var ob in jsonData ) {
-						listItem = '<div data-id="' + jsonData[ob].id + '" id="' + jsonData[ob].id + '" class=\"col-lg-4 up\"><h2>' + jsonData[ob].objectname + '</h2><p class=\"text-danger\">'+jsonData[ob].description+'</p><p></br><h4>Quantity:</h4><div class="input-group"><span class="input-group-btn"><button type="button" class="btn btn-default" data-value="decrease" data-target="#i'+jsonData[ob].id+'" data-toggle="spinner"><span class="glyphicon glyphicon-minus"></span></button></span><input type="text" data-ride="spinner" id="i'+jsonData[ob].id+'" class="form-control input-number" value="'+jsonData[ob].quantity+'"><span class="input-group-btn"><button type="button" class="btn btn-default" data-value="increase" data-target="#i'+jsonData[ob].id+'" data-toggle="spinner"><span class="glyphicon glyphicon-plus"></span></button></span></div><p></br><h4>Total price: <b>'+jsonData[ob].price+'</b></h4></br></p></p><a data-id="' + jsonData[ob].id + '" href=\"#\" class=\"btn btn-lg btn-success confirm-delete\" data-toggle=\"modal\" data-target=\"#basicModal\">Remove all</a></div>';
+						listItem = '<div data-id="' + jsonData[ob].id + '" id="' + jsonData[ob].id + '" class=\"col-lg-4 up\"><h2>' + jsonData[ob].objectname + '</h2><p class=\"text-danger\">'+jsonData[ob].description+'</p><p></br><h4>Quantity: <b>'+jsonData[ob].quantity+'</b></h4><p></br><h4>Total price: <b>'+jsonData[ob].price+'€</b></h4></br></p></p><a data-id="' + jsonData[ob].id + '" href=\"#\" class=\"btn btn-default editbtn\" data-toggle=\"modal\" data-target=\"#editModal\">Edit <span class="glyphicon glyphicon-edit"></span></a><a data-id="' + jsonData[ob].id + '" href=\"#\" class=\"btn btn-primary btn-danger confirm-delete\" data-toggle=\"modal\" data-target=\"#basicModal\">Remove <span class="glyphicon glyphicon-trash"></span></a></div>';
 						$(listItem).appendTo('#a');
 					}
 
@@ -44,7 +65,7 @@ $(function() {
 
 	// valida il campo di input e, se i dati sono corretti, invia dato al server e ricrea lista task
 	// dipende dal plugin jquery.validate.min.js - vedi http://docs.jquery.com/Plugins/Validation
-	$("form").validate({
+	$("#homeform").validate({
 		rules: {
 			obj: {
 				required: true,
@@ -140,10 +161,80 @@ $(document).on('click', '.confirm-delete', function() {
 	$('#basicModal').data('id',id);
     })
 
+//passa id per modificare elemento
+$(document).on('click', '.editbtn', function() {
+
+    var id = $(this).attr('data-id'); 
+    $('#editModal').data('id',id);
+	getObj( id, "getObj");
+    })
+
+// valida il campo di input e, se i dati sono corretti, invia dato al server e ricrea lista task
+	// dipende dal plugin jquery.validate.min.js - vedi http://docs.jquery.com/Plugins/Validation
+	$("#editform").validate({
+		rules: {
+			edobj: {
+				required: true,
+				minlength: 3,
+				maxlength: 20
+			},
+
+			eddescr: {
+				required: true,
+				minlength: 3,
+				maxlength: 20
+			},
+
+			edpr: {
+				required: true,
+				maxlength: 10,
+				number: true
+			},
+
+			edqty: {
+				required: true,
+				maxlength: 10,
+				number: true
+			}
+		},
+		messages: {
+			edobj: {
+				required: "Please enter an object",
+				minlength: "At least 3 chars",
+				maxlength: "At most 20 chars"
+			},
+
+			eddescr: {
+				required: "Please enter a description",
+				minlength: "At least 3 chars",
+				maxlength: "At most 20 chars"
+			},
+
+			edpr: {
+				required: "Please enter a price",
+				maxlength: "Please enter a real price",
+				number: "Please insert a number"
+			},
+
+			edqty: {
+				required: "Please enter a quantity",
+				maxlength: "Please enter a real quantity",
+				number: "Please insert a number"
+			}
+		},
+		submitHandler: function() {
+
+			var value = [$('#editModal').data('id'), $("#edobj").val(), $("#eddescr").val(), $("#edpr").val(), $("#edqty").val()];
+			syncToServer( value, "updateList");
+			$('#editModal').modal('hide');
+		
+		}							   
+	});
+
 //conferma cancellazione tramite modal
 $('#btnDel').click(function() {
     
-  	var deletedId = $('#basicModal').data('id');alert(deletedId);
+  	var deletedId = $('#basicModal').data('id');
   	$('[data-id='+deletedId+']').remove();
   	syncToServer( deletedId, "delTask");
   	$('#basicModal').modal('hide');
