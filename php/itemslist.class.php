@@ -3,9 +3,9 @@
 // require_once ('error_handler.php');
 require_once ('config.php');
 
-// This class builds a tasks list and 
+// This class builds a items list and 
 // performs add/delete/reorder actions on it
-class TasksList
+class ItemsList
 {
   // stored database connection
   private $mMysqli;
@@ -23,18 +23,18 @@ class TasksList
     $this->mMysqli->close();
   }
   
-  // Builds the tasks list
-  public function BuildTasksList()
+  // Builds the items list
+  public function BuildItemsList()
   {
     // initialize output
     $return_arr = array();
     // build query
-    $result = $this->mMysqli->query('SELECT * FROM ObjectsToBuy ORDER BY ordernum ASC');
-    // build task list as an associative array
+    $result = $this->mMysqli->query('SELECT * FROM ItemsToBuy ORDER BY ordernum ASC');
+    // build item list as an associative array
     while ($row = $result->fetch_assoc()) 
     { 
     $myList[ 'id' ] = $row['id'];
-	  $myList[ 'objectname' ] = $row['objectname'];
+	  $myList[ 'itemname' ] = $row['itemname'];
     $myList[ 'description' ] = $row['description'];
     $myList[ 'price' ] = $row['price'];
     $myList[ 'quantity' ] = $row['quantity'];
@@ -50,72 +50,72 @@ class TasksList
     // perform action requested by client
     switch($action)
     {
-      // Reorder task list
+      // Reorder item list
       case 'updateList':
 		
         $id = trim($this->mMysqli->real_escape_string($content[0]));
-		    $obj = trim($this->mMysqli->real_escape_string($content[1]));
+		    $itm = trim($this->mMysqli->real_escape_string($content[1]));
         $des = trim($this->mMysqli->real_escape_string($content[2]));
         $pr = trim($this->mMysqli->real_escape_string($content[3]));
         $qty = trim($this->mMysqli->real_escape_string($content[4]));
           
           // update item
-          $result = $this->mMysqli->query('UPDATE ObjectsToBuy SET objectname="' . $obj . '", description="' . $des . '", price="' . $pr . '", quantity="' . $qty .'" WHERE id="' . $id . '"');
-        $updatedList = $this->BuildTasksList();
+          $result = $this->mMysqli->query('UPDATE ItemsToBuy SET itemname="' . $itm . '", description="' . $des . '", price="' . $pr . '", quantity="' . $qty .'" WHERE id="' . $id . '"');
+        $updatedList = $this->BuilditemsList();
         return $updatedList;
         break;
      
-      // Add a new task
-      case 'addNewTask':
+      // Add a new item
+      case 'addNewItem':
         // escape input data
-        $obj = trim($this->mMysqli->real_escape_string($content[0]));
+        $itm = trim($this->mMysqli->real_escape_string($content[0]));
         $des = trim($this->mMysqli->real_escape_string($content[1]));
         $pr = trim($this->mMysqli->real_escape_string($content[2]));
         $qty = trim($this->mMysqli->real_escape_string($content[3]));
-        // continue only if task name is not null
-        if ($obj)
+        // continue only if item name is not null
+        if ($itm)
         {
           // obtain the highest order_no
           $result = $this->mMysqli->query('SELECT (MAX(ordernum) + 1) ' . 
-                                          'AS ordernum FROM ObjectsToBuy');
+                                          'AS ordernum FROM ItemsToBuy');
           $row = $result->fetch_assoc();
           // if the table is empty, order_no will be null
           $order = $row['ordernum'];          
           if (!$order) $order = 1;
-          // insert the new task as the bottom of the list
+          // insert the new item as the bottom of the list
           $result = $this->mMysqli->query
-                          ('INSERT INTO ObjectsToBuy (ordernum, objectname, description, price, quantity ) ' . 
-                           'VALUES ("' . $order . '", "' . $obj . '", "' . $des . '", "' . $pr . '", "' . $qty . '")');
-          // return the updated tasks list
-          $updatedList = $this->BuildTasksList();
+                          ('INSERT INTO ItemsToBuy (ordernum, itemname, description, price, quantity ) ' . 
+                           'VALUES ("' . $order . '", "' . $itm . '", "' . $des . '", "' . $pr . '", "' . $qty . '")');
+          // return the updated items list
+          $updatedList = $this->BuilditemsList();
           return $updatedList;
         }
         break;
       
-      // Delete task
-      case 'delTask':
+      // Delete item
+      case 'delItem':
         // escape input data
         $content = trim($this->mMysqli->real_escape_string($content));
-        // delete the task
-        $result = $this->mMysqli->query('DELETE FROM ObjectsToBuy WHERE id="' . 
+        // delete the item
+        $result = $this->mMysqli->query('DELETE FROM ItemsToBuy WHERE id="' . 
                                         $content . '"');
-        $updatedList = $this->BuildTasksList();
+        $updatedList = $this->BuilditemsList();
         return $updatedList;
         break;
     
 
-    // get an object by id
-      case 'getObj':
+    // get an item by id
+      case 'getItem':
         // escape input data
         $content = trim($this->mMysqli->real_escape_string($content));
-        // delete the task
-        $result = $this->mMysqli->query('SELECT * FROM ObjectsToBuy WHERE id="' . 
+        // delete the item
+        $result = $this->mMysqli->query('SELECT * FROM ItemsToBuy WHERE id="' . 
                                         $content . '"');
       $return_arr = array();
       while ($row = $result->fetch_assoc()) 
     { 
     $myList[ 'id' ] = $row['id'];
-    $myList[ 'objectname' ] = $row['objectname'];
+    $myList[ 'itemname' ] = $row['itemname'];
     $myList[ 'description' ] = $row['description'];
     $myList[ 'price' ] = $row['price'];
     $myList[ 'quantity' ] = $row['quantity'];

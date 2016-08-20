@@ -1,12 +1,12 @@
 <?php
-	require ('taskslist.class.php');
+	require ('itemslist.class.php');
 
-	$myTasksList = new TasksList();
+	$myItemsList = new ItemsList();
 
 	// RIMUOVERE SLEEP(): è qui solo per simulare ritardo di rete
 	// in caso di collegamento su localhost
 	sleep(1);
 
     header("Content-type: application/json");  // myme-type standard !
-	print $myTasksList->BuildTasksList();
+	print $myItemsList->BuildItemsList();
 ?> 

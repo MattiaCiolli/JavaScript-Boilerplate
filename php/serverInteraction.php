@@ -1,9 +1,9 @@
 <?php
 // load helper class
-require_once ('taskslist.class.php');
+require_once ('itemslist.class.php');
 
-// create TasksList object
-$myTasksList = new TasksList();
+// create itemsList object
+$myItemsList = new ItemsList();
 
 // read parameters
 $action = $_GET['action'];
@@ -16,6 +16,6 @@ header('Cache-Control: no-cache, must-revalidate');
 header('Pragma: no-cache');
 header("Content-type: application/json");  // myme-type standard !
 
-// execute the client request and return the updated tasks list
-echo $myTasksList->Process($content, $action);
+// execute the client request and return the updated items list
+echo $myItemsList->Process($content, $action);
 ?>
