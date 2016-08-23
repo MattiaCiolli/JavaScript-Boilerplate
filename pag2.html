@@ -7,8 +7,10 @@
 
 	<link type="text/css" rel="stylesheet" href="css/bootstrap.css" />
 	<link type="text/css" rel="stylesheet" href="css/mycss.css" />
-	<link rel="stylesheet" type="text/css" href="js/plugins/slick/slick.css"/>
-	<link rel="stylesheet" type="text/css" href="js/plugins/slick/slick-theme.css"/>
+	<link rel="stylesheet" type="text/css" href="css/slick.css"/>
+	<link rel="stylesheet" type="text/css" href="css/slick-theme.css"/>
+	<link rel="stylesheet" href="//blueimp.github.io/Gallery/css/blueimp-gallery.min.css">
+	<link rel="stylesheet" href="css/bootstrap-image-gallery.min.css">	
 
 
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
@@ -18,58 +20,89 @@
 	<script type="text/javascript" src="js/plugins/jqvalidate/jquery.validate.min.js"></script>
 	<script type="text/javascript" src="js/plugins/bootstrap/bootstrap.js"></script>
 	<script type="text/javascript" src="js/plugins/spinner/bootstrap-spinner.js"></script>
-	<script type="text/javascript" src="js/mycode.js"></script>
 	<script type="text/javascript" src="js/startslick.js"></script>
+	
 </head>
 
 <body>
 
+<div class="navbar navbar-inverse navbar-fixed-top " role="navigation">
+      <div class="container">
 
-<div class="container">
+        <div class="navbar-header">
+          
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+         
 
-	<!-- justified navigation menu-->
-	<div class="masthead">
-		<nav>
-			<ul class="nav nav-justified">
-				<li class="active"><a href="index.html">Home</a></li>
-				<li><a href="pag2.html">Pag 2</a></li>
-				<li><a href="#">Services</a></li>
-				<li><a href="#">Downloads</a></li>
-				<li><a href="#">About</a></li>
-				<li><a href="#">Contact</a></li>
-			</ul>
-		</nav>
-	</div>
+          <a class="navbar-brand  hidden-xs " href="index.html"><b class="menuButton">JavaScript Boilerplate</b></a>
+
+        </div>
+
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li ><a href="index.html">Home</a></li>
+            <li ><a href="pag2.html">Pag 2</a></li>
+            <li ><a href="recensioni.html">Recensioni</a></li>
+            <li ><a href="faq.html">FAQ</a></li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+<div id="contop" class="container">
+
 
 	<!-- Jumbotron -->
 	<div class="jumbotron">
-		<h1>Marketing stuff!</h1>
-		<p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet.</p>
-		<p><a class="btn btn-lg btn-success" href="#" role="button">Get started today</a></p>
+		<h1>Images presentation</h1>
+		<p class="lead">Slick plugin for the carousel, setted via JQuery. Drag and drop elements in the image gallery on the red circle to have more infos about an image</p>
+		
 	</div>
 
 	<div class="autoplay">
-  <div><img class="imgslick" src="http://ia.media-imdb.com/images/M/MV5BMTkxNDYxOTA4M15BMl5BanBnXkFtZTgwNTk0NzQxMTE@._V1_.jpg" alt="The Matrix"></div>
-  <div><img class="imgslick" src="http://ia.media-imdb.com/images/M/MV5BMTQxOTA2NDUzOV5BMl5BanBnXkFtZTgwNzY2MTMxMzE@._V1_SY1000_CR0,0,631,1000_AL_.jpg" alt="FF7"></div>
-  <div><img class="imgslick" src="http://ia.media-imdb.com/images/M/MV5BMTU4NzMyNDk1OV5BMl5BanBnXkFtZTcwOTEwMzU1MQ@@._V1_.jpg" alt="I am legend"></div>
-  <div><img class="imgslick" src="http://ia.media-imdb.com/images/M/MV5BZWFjYmZmZGQtYzg4YS00ZGE5LTgwYzAtZmQwZjQ2NDliMGVmXkEyXkFqcGdeQXVyNTUyMzE4Mzg@._V1_SY1000_CR0,0,696,1000_AL_.jpg" alt="5th element"></div>
-  <div><img class="imgslick" src="http://ia.media-imdb.com/images/M/MV5BOTAzODEzNDAzMl5BMl5BanBnXkFtZTgwMDU1MTgzNzE@._V1_SY1000_CR0,0,677,1000_AL_.jpg" alt="Star wars 7"></div>
-  <div><img class="imgslick" src="http://ia.media-imdb.com/images/M/MV5BMTIxOTY1NjUyN15BMl5BanBnXkFtZTcwMjMxMDk1MQ@@._V1_.jpg" alt="kung fu panda"></div>
-  <div><img class="imgslick" src="http://ia.media-imdb.com/images/M/MV5BMTczNTI2ODUwOF5BMl5BanBnXkFtZTcwMTU0NTIzMw@@._V1_SY1000_CR0,0,674,1000_AL_.jpg" alt="ironman"></div>
-  <div><img class="imgslick" src="http://ia.media-imdb.com/images/M/MV5BOTgxMDQwMDk0OF5BMl5BanBnXkFtZTgwNjU5OTg2NDE@._V1_SY1000_CR0,0,674,1000_AL_.jpg" alt="inside out"></div>
-  <div><img class="imgslick" src="http://ia.media-imdb.com/images/M/MV5BNTUwODQyNjM0NF5BMl5BanBnXkFtZTcwNDMwMTU1Mw@@._V1_SY1000_CR0,0,674,1000_AL_.jpg" alt="The expendables"></div>
+  <div><a href="http://www.imdb.com/title/tt0133093/?ref_=nv_sr_5"><img class="imgslick img-responsive" src="http://ia.media-imdb.com/images/M/MV5BMTkxNDYxOTA4M15BMl5BanBnXkFtZTgwNTk0NzQxMTE@._V1_.jpg" alt="The Matrix"></a></div>
+  <div><a href="http://www.imdb.com/title/tt2820852/?ref_=nv_sr_3"><img class="imgslick img-responsive" src="http://ia.media-imdb.com/images/M/MV5BMTQxOTA2NDUzOV5BMl5BanBnXkFtZTgwNzY2MTMxMzE@._V1_SY1000_CR0,0,631,1000_AL_.jpg" alt="FF7"></a></div>
+  <div><a href="http://www.imdb.com/title/tt0480249/?ref_=nv_sr_1"><img class="imgslick img-responsive" src="http://ia.media-imdb.com/images/M/MV5BMTU4NzMyNDk1OV5BMl5BanBnXkFtZTcwOTEwMzU1MQ@@._V1_.jpg" alt="I am legend"></a></div>
+  <div><a href="http://www.imdb.com/title/tt0377917/?ref_=nv_sr_5"><img class="imgslick img-responsive" src="http://ia.media-imdb.com/images/M/MV5BZWFjYmZmZGQtYzg4YS00ZGE5LTgwYzAtZmQwZjQ2NDliMGVmXkEyXkFqcGdeQXVyNTUyMzE4Mzg@._V1_SY1000_CR0,0,696,1000_AL_.jpg" alt="5th element"></a></div>
+  <div><a href="http://www.imdb.com/title/tt2488496/?ref_=nv_sr_1"><img class="imgslick img-responsive" src="http://ia.media-imdb.com/images/M/MV5BOTAzODEzNDAzMl5BMl5BanBnXkFtZTgwMDU1MTgzNzE@._V1_SY1000_CR0,0,677,1000_AL_.jpg" alt="Star wars 7"></a></div>
+  <div><a href="http://www.imdb.com/title/tt0441773/?ref_=nv_sr_2"><img class="imgslick img-responsive" src="http://ia.media-imdb.com/images/M/MV5BMTIxOTY1NjUyN15BMl5BanBnXkFtZTcwMjMxMDk1MQ@@._V1_.jpg" alt="kung fu panda"></a></div>
+  <div><a href="http://www.imdb.com/title/tt0371746/?ref_=nv_sr_1"><img class="imgslick img-responsive" src="http://ia.media-imdb.com/images/M/MV5BMTczNTI2ODUwOF5BMl5BanBnXkFtZTcwMTU0NTIzMw@@._V1_SY1000_CR0,0,674,1000_AL_.jpg" alt="ironman"></a></div>
+  <div><a href="http://www.imdb.com/title/tt2096673/?ref_=nv_sr_1"><img class="imgslick img-responsive" src="http://ia.media-imdb.com/images/M/MV5BOTgxMDQwMDk0OF5BMl5BanBnXkFtZTgwNjU5OTg2NDE@._V1_SY1000_CR0,0,674,1000_AL_.jpg" alt="inside out"></a></div>
+  <div><a href="http://www.imdb.com/title/tt1320253/?ref_=nv_sr_2"><img class="imgslick img-responsive" src="http://ia.media-imdb.com/images/M/MV5BNTUwODQyNjM0NF5BMl5BanBnXkFtZTcwNDMwMTU1Mw@@._V1_SY1000_CR0,0,674,1000_AL_.jpg" alt="The expendables"></a></div>
 </div>
-
+<br/>
+<div class="alert alert-info up"><h2 class="blog-post-title">Drag and drop on the red circle to have more infos</h2></div>
+<br/>
+ <div class="row">
+  <div class="col-md-3">
+      <img src="img/CUCCIOLO.JPG" alt="Sea Elephant" class="img-circle">
+  </div>
+  <div class="col-md-3">
+      <img src="img/ironmaiden.JPG" alt="Iron Maiden" class="img-circle">
+  </div>
+  <div class="col-md-3">
+      <img src="img/TEMPIO.JPG" alt="Temple" class="img-circle">
+  </div>
+   <div class="col-md-3">
+      <img src="img/TORTU.JPG" alt="Turtle" class="img-circle">
+  </div>
+  <div class="col-md-4 mycircle center-block"> Drop here for info</div>
+</div>
 	
 	<br/><br/>
 
 	<!--footer -->
 	<footer class="footer">
-		<p>&copy; 2016 Company, Inc.</p>
+		<p>&copy; 2016 Mattia Ciolli</p>
 	</footer>
 
 </div> <!-- /container -->
-
 
 </body>
 
