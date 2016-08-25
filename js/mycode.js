@@ -24,7 +24,7 @@ function syncToServer( value, op ) {
 	});
 }		
 
-function getItem	( value, op ){
+function getItem ( value, op ){
 	$.ajax({
 		url: "php/serverInteraction.php",
 		data: { content: value, action: op },

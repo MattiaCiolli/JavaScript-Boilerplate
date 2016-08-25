@@ -21,6 +21,7 @@
 	<script type="text/javascript" src="js/plugins/bootstrap/bootstrap.js"></script>
 	<script type="text/javascript" src="js/plugins/spinner/bootstrap-spinner.js"></script>
 	<script type="text/javascript" src="js/startslick.js"></script>
+	<script type="text/javascript" src="js/dragDrop.js"></script>
 	
 </head>
 
@@ -80,19 +81,19 @@
 <div class="alert alert-info up"><h2 class="blog-post-title">Drag and drop on the red circle to have more infos</h2></div>
 <br/>
  <div class="row">
-  <div class="col-md-3">
-      <img src="img/CUCCIOLO.JPG" alt="Sea Elephant" class="img-circle">
+  <div class="col-xs-3 col-md-3">
+      <img id="elefante" src="img/CUCCIOLO.JPG" alt="Sea Elephant" class="img-circle drag">
   </div>
-  <div class="col-md-3">
-      <img src="img/ironmaiden.JPG" alt="Iron Maiden" class="img-circle">
+  <div class="col-xs-3 col-md-3">
+      <img id="ironmaiden" src="img/ironmaiden.JPG" alt="Iron Maiden" class="img-circle drag">
   </div>
-  <div class="col-md-3">
-      <img src="img/TEMPIO.JPG" alt="Temple" class="img-circle">
+  <div class="col-xs-3 col-md-3">
+      <img id="tempio" src="img/TEMPIO.JPG" alt="Temple" class="img-circle drag">
   </div>
-   <div class="col-md-3">
-      <img src="img/TORTU.JPG" alt="Turtle" class="img-circle">
+   <div class="col-xs-3 col-md-3">
+      <img id="tartaruga" src="img/TORTU.JPG" alt="Turtle" class="img-circle drag">
   </div>
-  <div class="col-md-4 mycircle center-block"> Drop here for info</div>
+  <div id="drop" class="col-md-2 col-md-offset-4 mycircle"> Drop here for info</div>
 </div>
 	
 	<br/><br/>

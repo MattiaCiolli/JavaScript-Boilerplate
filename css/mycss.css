@@ -11,6 +11,10 @@
 	width: 200px;
 	height: 200px; 
 	background-color: red;
-
+	z-index: -1;
+	font-size:20px;
+	color:#fff;
+	line-height:200px;
+	text-align:center;
 }
 
