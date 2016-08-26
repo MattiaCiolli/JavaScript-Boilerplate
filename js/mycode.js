@@ -20,6 +20,10 @@ function syncToServer( value, op ) {
 				$(listItem).appendTo('#a');
 			};
 		},
+		
+		error: function (request, status, error) {
+        alert(request.responseText);},
+
 		dataType: "json"
 	});
 }		
@@ -40,6 +44,10 @@ function getItem ( value, op ){
 			};
 
 		},
+		
+		error: function (request, status, error) {
+        alert(request.responseText);},
+
 		dataType: "json"
 	});
 }		
@@ -70,6 +78,10 @@ $(function() {
 			}
 
 		},
+		
+		error: function (request, status, error) {
+        alert(status);},
+		
 		dataType: "json"
 	});
 

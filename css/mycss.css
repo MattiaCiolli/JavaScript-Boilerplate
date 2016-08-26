@@ -1,11 +1,17 @@
 #x { width: 20px; height: 20px; float: right; margin-right:5px;}
+
 .up { margin: 25px 0px 25px 0px;}
+
 .up:hover {
    background-color: aliceblue;
 }
+
 .imgslick{ width:340px; height:500px;}
+
 #contop{padding-top:75px;}
+
 .img-circle{ width:200px; height:200px;}
+
 .mycircle {
 	border-radius: 50%;
 	width: 200px;
@@ -16,5 +22,44 @@
 	color:#fff;
 	line-height:200px;
 	text-align:center;
+	float: none;
+    margin: 0 auto;
 }
 
+.img-circle{margin-left:30px;}
+
+@media (max-width: 990px){
+.mycircle {
+	width: 150px;
+	height: 150px; 
+	font-size:15px;
+	line-height:150px;
+}
+
+.img-circle{ width:150px; height:150px; margin-left:0px;}
+.imgslick{ width:300px; height:350px;}
+}
+
+@media (max-width: 590px){
+.mycircle {
+	width: 100px;
+	height: 100px; 
+	font-size:10px;
+	line-height:100px;
+}
+
+.img-circle{ width:100px; height:100px; margin-left:0px;}
+.imgslick{ width:150px; height:200px;}
+}
+
+@media (max-width: 400px){
+.mycircle {
+	width: 70px;
+	height: 70px; 
+	font-size:7px;
+	line-height:70px;
+}
+
+.img-circle{ width:70px; height:70px; margin-left:0px;}
+.imgslick{ width:100px; height:150px;}
+}

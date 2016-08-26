@@ -34,7 +34,7 @@ class ItemsList
     while ($row = $result->fetch_assoc()) 
     { 
     $myList[ 'id' ] = $row['id'];
-	  $myList[ 'itemname' ] = $row['itemname'];
+	$myList[ 'itemname' ] = $row['itemname'];
     $myList[ 'description' ] = $row['description'];
     $myList[ 'price' ] = $row['price'];
     $myList[ 'quantity' ] = $row['quantity'];
@@ -54,13 +54,13 @@ class ItemsList
       case 'updateList':
 		
         $id = trim($this->mMysqli->real_escape_string($content[0]));
-		    $itm = trim($this->mMysqli->real_escape_string($content[1]));
+		$itm = trim($this->mMysqli->real_escape_string($content[1]));
         $des = trim($this->mMysqli->real_escape_string($content[2]));
         $pr = trim($this->mMysqli->real_escape_string($content[3]));
         $qty = trim($this->mMysqli->real_escape_string($content[4]));
           
-          // update item
-          $result = $this->mMysqli->query('UPDATE ItemsToBuy SET itemname="' . $itm . '", description="' . $des . '", price="' . $pr . '", quantity="' . $qty .'" WHERE id="' . $id . '"');
+        // update item
+        $result = $this->mMysqli->query('UPDATE ItemsToBuy SET itemname="' . $itm . '", description="' . $des . '", price="' . $pr . '", quantity="' . $qty .'" WHERE id="' . $id . '"');
         $updatedList = $this->BuilditemsList();
         return $updatedList;
         break;
