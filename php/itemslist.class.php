@@ -50,7 +50,7 @@ class ItemsList
     // perform action requested by client
     switch($action)
     {
-      // Reorder item list
+      // update item list
       case 'updateList':
 		
         $id = trim($this->mMysqli->real_escape_string($content[0]));
@@ -123,7 +123,23 @@ class ItemsList
     }
     // return the array as json 
     return json_encode($return_arr);
-      
+    break;
+	
+	 // update order
+      case 'reorderList':
+		
+        $idarray = trim($this->mMysqli->real_escape_string($content));//gives a string
+		$ids=unserialize($idarray);
+		
+        $counter = 1;
+
+  		foreach ($idarray) {
+		$result = $this->mMysqli->query('UPDATE ItemsToBuy SET ordernum="' . $counter . '" WHERE id="' . (int)$idarray . '"');
+  		$counter ++;
+  		}
+		
+        $updatedList = $this->BuilditemsList();
+        return $updatedList;
         break;
     }
   }
