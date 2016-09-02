@@ -34,7 +34,7 @@ class ItemsList
     while ($row = $result->fetch_assoc()) 
     { 
     $myList[ 'id' ] = $row['id'];
-	$myList[ 'itemname' ] = $row['itemname'];
+	  $myList[ 'itemname' ] = $row['itemname'];
     $myList[ 'description' ] = $row['description'];
     $myList[ 'price' ] = $row['price'];
     $myList[ 'quantity' ] = $row['quantity'];
@@ -54,7 +54,7 @@ class ItemsList
       case 'updateList':
 		
         $id = trim($this->mMysqli->real_escape_string($content[0]));
-		$itm = trim($this->mMysqli->real_escape_string($content[1]));
+		    $itm = trim($this->mMysqli->real_escape_string($content[1]));
         $des = trim($this->mMysqli->real_escape_string($content[2]));
         $pr = trim($this->mMysqli->real_escape_string($content[3]));
         $qty = trim($this->mMysqli->real_escape_string($content[4]));
@@ -127,21 +127,23 @@ class ItemsList
 	
 	 // update order
       case 'reorderList':
-		
-        $idarray = trim($this->mMysqli->real_escape_string($content));//gives a string
-		$ids=unserialize($idarray);
-		
-        $counter = 1;
 
-  		foreach ($idarray) {
-		$result = $this->mMysqli->query('UPDATE ItemsToBuy SET ordernum="' . $counter . '" WHERE id="' . (int)$idarray . '"');
-  		$counter ++;
-  		}
-		
-        $updatedList = $this->BuilditemsList();
+      $newOrder = $content;
+
+    // update list
+        for ($i=0; $i < count($newOrder); $i++)
+        {
+          // escape data received from client
+          $newOrder[$i] = $this->mMysqli->real_escape_string($newOrder[$i]);
+          // update task
+          $result = $this->mMysqli->query('UPDATE ItemsToBuy SET ordernum="' . $i . '" WHERE id="' . $newOrder[$i] . '"');
+        }
+
+        $updatedList = $this->BuildItemsList();
         return $updatedList;
         break;
-    }
+
   }
+}
 }
 ?>

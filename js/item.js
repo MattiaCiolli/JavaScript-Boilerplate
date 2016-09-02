@@ -1,26 +1,36 @@
-function Item (ordernum, itemname, description, price, quantity) {
-    this.ordernum = ordernum;
+function Item (itemname, description, price, quantity) {
 	this.itemname = itemname;
     this.description = description;
 	this.price = price;
 	this.quantity = quantity;
 }
  
-Item.prototype.getInfo = function(item) {
-	for (var v in item) { document.write(v + ": " + item[v]); } 
+Item.prototype.getInfo = function() {
+	for (var v in this) { alert(v + ": " + this[v]);} 
 };
 
 
 $(document).ready(function(){
 		createList();
-		$('#sort').sortable({
+		$( ".sort" ).sortable(
+	    {
+			cursor: 'crosshair',
 			update: function(event, ui) {
+
+				//serialize id
+				var orderID = [];
+				$(".sort .col-lg-4").each(
+					function() {
+						var id = $(this).attr("id");
+						orderID.push(id);
+					}
+				);			
 				
-				//aggiustare id perche non funziona con numeri
-				var orderID = $(this).sortable('serialize');//creates an array of the item's ids after the sort
-				updateOrder(orderID, "reorderList");
-			}
-		});
+				updateOrder( orderID, "reorderList");
+			}				  
+		}
+	);
+		$( "#sortable" ).disableSelection();//prevents text selection on sortable elements
 	});
 
 
@@ -29,13 +39,21 @@ function createList() {
 		url: "php/initializeList.php",
 		success:  function(jsonData) {
 
-			$("#loading").hide();
+			$('.up').remove();
+			listItem=[];
 
-			var listItem=JSON.parse(jsonData);
+			for ( var ob in jsonData ) {
+
+				var item= new Item();
+				item=jsonData[ob];
+				listItem.push(item);
+			}
+
+			$("#loading").hide();
 			
 			for ( var ob in listItem ) {
-				var appendOb = '<div data-id="' + jsonData[ob].id + '" id="' + jsonData[ob].id + '" class=\"col-lg-4 up sort\"><h2>' + jsonData[ob].itemname + '</h2></div>';
-				$(listItem).appendTo('#a');
+				var appendOb = '<div data-id="' + listItem[ob].id + '" id="' + listItem[ob].id + '" class=\"col-lg-4 up\"><h2>' + listItem[ob].itemname + '</h2></div>';
+				$(appendOb).appendTo('#a');
 			}
 
 		},
@@ -59,20 +77,3 @@ function updateOrder ( value, op ){
 		dataType: "json"
 	});
 }		
-
-/*
-var grocery_list = {
-  "Banana": { category: "produce", price: 5.99 },
-  "Chocolate": { category: "candy", price: 2.75 },
-  "Wheat Bread": { category: "grains and breads", price: 2.99 }
-}
-
-var wrapper = $('#wrapper'), container;
-for (var key in grocery_list){
-    container = $('<div id="grocery_item" class="container"></div>');
-    wrapper.append(container);
-    container.append('<div class="item">' + key +'</div>');
-    container.append('<div class="category">' + grocery_list[key].category +'</div>');
-    container.append('<div class="price">' + grocery_list[key].price +'</div>');
-}
-*/
