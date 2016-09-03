@@ -33,117 +33,117 @@ class ItemsList
     // build item list as an associative array
     while ($row = $result->fetch_assoc()) 
     { 
-    $myList[ 'id' ] = $row['id'];
-	  $myList[ 'itemname' ] = $row['itemname'];
-    $myList[ 'description' ] = $row['description'];
-    $myList[ 'price' ] = $row['price'];
-    $myList[ 'quantity' ] = $row['quantity'];
-    array_push($return_arr,$myList);
+      $myList[ 'id' ] = $row['id'];
+      $myList[ 'itemname' ] = $row['itemname'];
+      $myList[ 'description' ] = $row['description'];
+      $myList[ 'price' ] = $row['price'];
+      $myList[ 'quantity' ] = $row['quantity'];
+      array_push($return_arr,$myList);
     }
-    // return the array as json 
+    //return the array as json 
     return json_encode($return_arr);
   }
 
-  // Handles the server-side data processing
+  //Handles the server-side data processing
   public function Process($content, $action)
   {
-    // perform action requested by client
+    //perform action requested by client
     switch($action)
     {
-      // update item list
+      //update item list
       case 'updateList':
-		
-        $id = trim($this->mMysqli->real_escape_string($content[0]));
-		    $itm = trim($this->mMysqli->real_escape_string($content[1]));
-        $des = trim($this->mMysqli->real_escape_string($content[2]));
-        $pr = trim($this->mMysqli->real_escape_string($content[3]));
-        $qty = trim($this->mMysqli->real_escape_string($content[4]));
-          
-        // update item
-        $result = $this->mMysqli->query('UPDATE ItemsToBuy SET itemname="' . $itm . '", description="' . $des . '", price="' . $pr . '", quantity="' . $qty .'" WHERE id="' . $id . '"');
-        $updatedList = $this->BuilditemsList();
-        return $updatedList;
-        break;
-     
-      // Add a new item
+
+      $id = trim($this->mMysqli->real_escape_string($content[0]));
+      $itm = trim($this->mMysqli->real_escape_string($content[1]));
+      $des = trim($this->mMysqli->real_escape_string($content[2]));
+      $pr = trim($this->mMysqli->real_escape_string($content[3]));
+      $qty = trim($this->mMysqli->real_escape_string($content[4]));
+
+      // update item
+      $result = $this->mMysqli->query('UPDATE ItemsToBuy SET itemname="' . $itm . '", description="' . $des . '", price="' . $pr . '", quantity="' . $qty .'" WHERE id="' . $id . '"');
+      $updatedList = $this->BuilditemsList();
+      return $updatedList;
+      break;
+
+    // Add a new item
       case 'addNewItem':
-        // escape input data
-        $itm = trim($this->mMysqli->real_escape_string($content[0]));
-        $des = trim($this->mMysqli->real_escape_string($content[1]));
-        $pr = trim($this->mMysqli->real_escape_string($content[2]));
-        $qty = trim($this->mMysqli->real_escape_string($content[3]));
-        // continue only if item name is not null
-        if ($itm)
-        {
-          // obtain the highest order_no
-          $result = $this->mMysqli->query('SELECT (MAX(ordernum) + 1) ' . 
-                                          'AS ordernum FROM ItemsToBuy');
-          $row = $result->fetch_assoc();
-          // if the table is empty, order_no will be null
-          $order = $row['ordernum'];          
-          if (!$order) $order = 1;
-          // insert the new item as the bottom of the list
-          $result = $this->mMysqli->query
-                          ('INSERT INTO ItemsToBuy (ordernum, itemname, description, price, quantity ) ' . 
-                           'VALUES ("' . $order . '", "' . $itm . '", "' . $des . '", "' . $pr . '", "' . $qty . '")');
-          // return the updated items list
-          $updatedList = $this->BuilditemsList();
-          return $updatedList;
-        }
-        break;
-      
-      // Delete item
-      case 'delItem':
-        // escape input data
-        $content = trim($this->mMysqli->real_escape_string($content));
-        // delete the item
-        $result = $this->mMysqli->query('DELETE FROM ItemsToBuy WHERE id="' . 
-                                        $content . '"');
+      // escape input data
+      $itm = trim($this->mMysqli->real_escape_string($content[0]));
+      $des = trim($this->mMysqli->real_escape_string($content[1]));
+      $pr = trim($this->mMysqli->real_escape_string($content[2]));
+      $qty = trim($this->mMysqli->real_escape_string($content[3]));
+      // continue only if item name is not null
+      if ($itm)
+      {
+        // obtain the highest order_no
+        $result = $this->mMysqli->query('SELECT (MAX(ordernum) + 1) ' . 
+          'AS ordernum FROM ItemsToBuy');
+        $row = $result->fetch_assoc();
+        // if the table is empty, order_no will be null
+        $order = $row['ordernum'];          
+        if (!$order) $order = 1;
+        // insert the new item as the bottom of the list
+        $result = $this->mMysqli->query
+        ('INSERT INTO ItemsToBuy (ordernum, itemname, description, price, quantity ) ' . 
+         'VALUES ("' . $order . '", "' . $itm . '", "' . $des . '", "' . $pr . '", "' . $qty . '")');
+        / return the updated items list
         $updatedList = $this->BuilditemsList();
         return $updatedList;
-        break;
-    
+      }
+      break;
+      
+    // Delete item
+      case 'delItem':
+      // escape input data
+      $content = trim($this->mMysqli->real_escape_string($content));
+      // delete the item
+      $result = $this->mMysqli->query('DELETE FROM ItemsToBuy WHERE id="' . 
+        $content . '"');
+      $updatedList = $this->BuilditemsList();
+      return $updatedList;
+      break;
+
 
     // get an item by id
       case 'getItem':
-        // escape input data
-        $content = trim($this->mMysqli->real_escape_string($content));
-        // delete the item
-        $result = $this->mMysqli->query('SELECT * FROM ItemsToBuy WHERE id="' . 
-                                        $content . '"');
+      // escape input data
+      $content = trim($this->mMysqli->real_escape_string($content));
+      // delete the item
+      $result = $this->mMysqli->query('SELECT * FROM ItemsToBuy WHERE id="' . 
+        $content . '"');
       $return_arr = array();
       while ($row = $result->fetch_assoc()) 
-    { 
-    $myList[ 'id' ] = $row['id'];
-    $myList[ 'itemname' ] = $row['itemname'];
-    $myList[ 'description' ] = $row['description'];
-    $myList[ 'price' ] = $row['price'];
-    $myList[ 'quantity' ] = $row['quantity'];
-    array_push($return_arr,$myList);
-    }
-    // return the array as json 
-    return json_encode($return_arr);
-    break;
-	
+      { 
+        $myList[ 'id' ] = $row['id'];
+        $myList[ 'itemname' ] = $row['itemname'];
+        $myList[ 'description' ] = $row['description'];
+        $myList[ 'price' ] = $row['price'];
+        $myList[ 'quantity' ] = $row['quantity'];
+        array_push($return_arr,$myList);
+      }
+      // return the array as json 
+      return json_encode($return_arr);
+      break;
+
 	 // update order
       case 'reorderList':
 
       $newOrder = $content;
 
     // update list
-        for ($i=0; $i < count($newOrder); $i++)
-        {
-          // escape data received from client
-          $newOrder[$i] = $this->mMysqli->real_escape_string($newOrder[$i]);
-          // update task
-          $result = $this->mMysqli->query('UPDATE ItemsToBuy SET ordernum="' . $i . '" WHERE id="' . $newOrder[$i] . '"');
-        }
+      for ($i=0; $i < count($newOrder); $i++)
+      {
+        // escape data received from client
+        $newOrder[$i] = $this->mMysqli->real_escape_string($newOrder[$i]);
+        // update item
+        $result = $this->mMysqli->query('UPDATE ItemsToBuy SET ordernum="' . $i . '" WHERE id="' . $newOrder[$i] . '"');
+      }
 
-        $updatedList = $this->BuildItemsList();
-        return $updatedList;
-        break;
+      $updatedList = $this->BuildItemsList();
+      return $updatedList;
+      break;
 
+    }
   }
-}
 }
 ?>

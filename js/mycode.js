@@ -22,12 +22,13 @@ function syncToServer( value, op ) {
 		},
 		
 		error: function (request, status, error) {
-        alert(request.responseText);},
+			alert(request.responseText);},
 
-		dataType: "json"
-	});
+			dataType: "json"
+		});
 }		
 
+//gets an item by its id. Called when editing an item
 function getItem ( value, op ){
 	$.ajax({
 		url: "php/serverInteraction.php",
@@ -46,15 +47,14 @@ function getItem ( value, op ){
 		},
 		
 		error: function (request, status, error) {
-        alert(request.responseText);},
+			alert(request.responseText);},
 
-		dataType: "json"
-	});
+			dataType: "json"
+		});
 }		
 
 
 $(function() {
-
 
 	//list loading at the beginning
 	$.ajax({
@@ -80,10 +80,10 @@ $(function() {
 		},
 		
 		error: function (request, status, error) {
-        alert(status);},
-		
-		dataType: "json"
-	});
+			alert(status);},
+			
+			dataType: "json"
+		});
 
 	
 //pass id to delete element
@@ -103,7 +103,6 @@ $(document).on('click', '.editbtn', function() {
 })
 
 
-
 //confirm deletion modal
 $('#btnDel').click(function() {
 
@@ -116,7 +115,7 @@ $('#btnDel').click(function() {
 //function to capitalize the first letter of a string. 
 //Added to prototype in order to use it like: 'string'.capitalizeFirstLetter()
 String.prototype.capitalizeFirstLetter = function() {
-    return this.charAt(0).toUpperCase() + this.slice(1);
+	return this.charAt(0).toUpperCase() + this.slice(1);
 }
 
 
