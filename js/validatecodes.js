@@ -17,7 +17,7 @@ jQuery.validator.addMethod("greaterthan", function(value, element, param) {
 			descr: {
 				required: true,
 				minlength: 3,
-				maxlength: 50
+				maxlength: 40
 			},
 
 			pr: {
@@ -43,7 +43,7 @@ jQuery.validator.addMethod("greaterthan", function(value, element, param) {
 			descr: {
 				required: "Please enter a description",
 				minlength: "At least 3 chars",
-				maxlength: "At most 50 chars"
+				maxlength: "At most 40 chars"
 			},
 
 			pr: {
@@ -98,7 +98,7 @@ jQuery.validator.addMethod("greaterthan", function(value, element, param) {
 			eddescr: {
 				required: true,
 				minlength: 3,
-				maxlength: 50
+				maxlength: 40
 			},
 
 			edpr: {
@@ -124,7 +124,7 @@ jQuery.validator.addMethod("greaterthan", function(value, element, param) {
 			eddescr: {
 				required: "Please enter a description",
 				minlength: "At least 3 chars",
-				maxlength: "At most 50 chars"
+				maxlength: "At most 40 chars"
 			},
 
 			edpr: {

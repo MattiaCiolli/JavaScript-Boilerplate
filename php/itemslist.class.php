@@ -86,7 +86,7 @@ class ItemsList
         $result = $this->mMysqli->query
         ('INSERT INTO ItemsToBuy (ordernum, itemname, description, price, quantity ) ' . 
          'VALUES ("' . $order . '", "' . $itm . '", "' . $des . '", "' . $pr . '", "' . $qty . '")');
-        / return the updated items list
+        // return the updated items list
         $updatedList = $this->BuilditemsList();
         return $updatedList;
       }

@@ -23,7 +23,7 @@ $(document).ready(function(){
 
 				//serialize ids 
 				var orderID = [];
-				$(".sort .col-lg-4").each(
+				$(".sort .col-md-4").each(
 					function() {
 						var id = $(this).attr("id");
 						orderID.push(id);//array with ids in new order
@@ -56,7 +56,7 @@ function createList() {
 			$("#loading").hide();
 			
 			for ( var ob in listItem ) {
-				var appendOb = '<div id="' + listItem[ob].id + '" class=\"col-lg-4 up\"><h2>' + listItem[ob].itemname + '</h2></div>';
+				var appendOb = '<div id="' + listItem[ob].id + '" class=\"col-xs-6 col-sm-6 col-md-4 up\"><h2>' + listItem[ob].itemname + '</h2></div>';
 				$(appendOb).appendTo('#a');
 			}
 

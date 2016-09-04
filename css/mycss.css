@@ -1,16 +1,37 @@
+.navbar { background-color: #1ABC9C; }
+
+.navbar-inverse .navbar-nav > li > a, .menuButton { color:#fff; font-weight: bold; }
+
+.navbar-inverse .navbar-nav > li > a:hover{
+
+	background-color:#00E1AD;
+}
+
+.menuButton:hover {
+
+	color: #efefef;
+}
+
+.jumbotron { background-image: url("../img/mat.png"); background-size: cover;}
+
+.jumbotron p, .jumbotron h1 { color:#fff; font-weight: bold;}
+
+.confirm-delete { margin-left: 10px; }
+
 #x { width: 20px; height: 20px; float: right; margin-right:5px;}
 
 .up { margin: 25px 0px 25px 0px;}
 
 .up:hover {
-   background-color: aliceblue;
+
+   background-color: #E0FFDF;
 }
 
-.imgslick{ width:340px; height:500px;}
+.imgslick { width:340px; height:500px; }
 
-#contop{padding-top:75px;}
+#contop { padding-top:75px; }
 
-.img-circle{ width:200px; height:200px;}
+.img-circle { width:200px; height:200px; }
 
 .mycircle {
 	border-radius: 50%;
