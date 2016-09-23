@@ -63,7 +63,8 @@ function createList() {
 		},
 		
 		error: function (request, status, error) {
-			alert(status);},
+			$('#errorModal').modal('show');
+			},
 			
 			dataType: "json"
 		});
@@ -78,7 +79,8 @@ function updateOrder ( value, op ){
 		success: createList(),
 		
 		error: function (request, status, error) {
-			alert(request.responseText);},
+			$('#errorModal').modal('show');
+			},
 
 			dataType: "json"
 		});

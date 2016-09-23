@@ -1,4 +1,3 @@
-
 // handles ajax calls to the server
 function syncToServer( value, op ) {
 	$.ajax({
@@ -22,7 +21,8 @@ function syncToServer( value, op ) {
 		},
 		
 		error: function (request, status, error) {
-			alert(request.responseText);},
+			$('#errorModal').modal('show');
+			},
 
 			dataType: "json"
 		});
@@ -47,7 +47,8 @@ function getItem ( value, op ){
 		},
 		
 		error: function (request, status, error) {
-			alert(request.responseText);},
+			$('#syncerrorModal').modal('show');
+			},
 
 			dataType: "json"
 		});
@@ -80,7 +81,8 @@ $(function() {
 		},
 		
 		error: function (request, status, error) {
-			alert(status);},
+			$('#errorModal').modal('show');
+			},
 			
 			dataType: "json"
 		});
