@@ -3,8 +3,7 @@
 
 	$myItemsList = new ItemsList();
 
-	// RIMUOVERE SLEEP(): è qui solo per simulare ritardo di rete
-	// in caso di collegamento su localhost
+	//just to simulate the server delay
 	sleep(1);
 
     header("Content-type: application/json");  // myme-type standard !

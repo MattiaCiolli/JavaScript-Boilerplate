@@ -4,8 +4,7 @@ jQuery.validator.addMethod("greaterthan", function(value, element, param) {
   return this.optional(element) || value > param;
 }, "Insert a real quantity");
 
-// valida il campo di input e, se i dati sono corretti, invia dato al server e ricrea lista item
-	// dipende dal plugin jquery.validate.min.js - vedi http://docs.jquery.com/Plugins/Validation
+// validates the input, if correct submits it
 	$("#homeform").validate({
 		rules: {
 			item: {
@@ -85,8 +84,7 @@ jQuery.validator.addMethod("greaterthan", function(value, element, param) {
 	});
 
 
-// valida il campo di input e, se i dati sono corretti, invia dato al server e ricrea lista item
-	// dipende dal plugin jquery.validate.min.js - vedi http://docs.jquery.com/Plugins/Validation
+// validates the input, if correct submits it
 	$("#editform").validate({
 		rules: {
 			edititem: {
